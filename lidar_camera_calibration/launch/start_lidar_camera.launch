@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<launch>
+  <!-- <param name="/use_sim_time" value="true"/> -->
+  <include file="$(find rs_to_velodyne)/launch/rs_to_velodyne.launch" />
+  <arg name="img_topic" default="lbas_image" />
+  <arg name="max_freq" default="90.0" />
+  <node pkg="camera_lbas" name="camera_lbas_node" type="camera_lbas_node" output="screen">
+    <param name="if_auto" value="false" type="bool" />
+    <param name="if_resize" value="false" type="bool" />
+    <param name="exp_time" value="90000.0" type="double" />
+    <param name="ip" value="192.168.1.201" type="string" />
+    <param name="max_hz" value="$(arg max_freq)" type="double" />
+    <!-- do not modify the above param except the IP of camera is really changed -->
+    <param name="pubtopic_name" value="$(arg img_topic)" type="string" />
+    <param name="display" value="1" type="int" />
+  </node>
+</launch>
